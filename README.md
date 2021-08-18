@@ -29,6 +29,13 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+
+<pre>
+<code>git clone https://github.com/asqararslonov2008/star-db </code>
+<code>cd star-db</code>
+<code>npm install</code>
+<code>npm start</code>
+</pre>
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**

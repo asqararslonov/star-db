@@ -1,92 +1,29 @@
-import React from "react";
-import "bootswatch/dist/darkly/bootstrap.min.css";
+import React from 'react';
 
-function App() {
+import Header from '../header/header';
+import RandomPlanet from '../random-planet/random-planet';
+import ItemList from '../item-list/item-list';
+import PersonDetails from '../person-details/person-details';
+
+import './app.css';
+import 'bootswatch/dist/darkly/bootstrap.min.css';
+
+const App = () => {
   return (
-    <div className="App">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            Navbar
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarColor01"
-            aria-controls="navbarColor01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
+    <div className='container'>
+      <Header />
+      <RandomPlanet />
 
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  Home
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Features
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Pricing
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  About
-                </a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">
-                    Action
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    Another action
-                  </a>
-                  <a class="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">
-                    Separated link
-                  </a>
-                </div>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <input
-                class="form-control me-sm-2"
-                type="text"
-                placeholder="Search"
-              />
-              <button class="btn btn-secondary my-2 my-sm-0" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
+      <div className="row mb2">
+        <div className="col-md-6">
+          <ItemList />
         </div>
-      </nav>
+        <div className="col-md-6">
+          <PersonDetails />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
