@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import './person-details.css';
 
 export default class PersonDetails extends Component {
@@ -9,7 +8,7 @@ export default class PersonDetails extends Component {
       <div className="person-details card">
         <img
             className="person-image"
-             alt={"person-image"}
+             alt={this.props.key}
           src="https://starwars-visualguide.com/assets/img/characters/3.jpg" />
         <div className="card-body">
           <h4>R2-D2</h4>

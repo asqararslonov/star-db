@@ -23,3 +23,12 @@
 .random-planet .list-group-item .term {
   margin-right: .5rem;
 }
+.hidden {
+  display: none;
+}
+.loader {
+  margin: 0 auto;
+}
+.loader-no {
+  display: none;
+}

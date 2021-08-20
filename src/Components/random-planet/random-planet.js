@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import swapiService from '../../services/swapi-service'
 import './random-planet.css';
-import { PushSpinner } from "react-spinners-kit";
+import {/* PushSpinner, TraceSpinner, WaveSpinner, CombSpinner,*/ PushSpinner} from "react-spinners-kit";
 export default class RandomPlanet extends Component {
 constructor() {
   super();
@@ -31,16 +31,22 @@ this.updatePlanet()
     console.log(response)
   }
   render() {
-    const {name, population, rotationPeriod, diameter, loader} = this.state
+    const {/*name*/ population, rotationPeriod, diameter, loader} = this.state
 
-    const load =  <PushSpinner size={130} color="#00bc8c" loading={true} />;
+    const load =
+    <PushSpinner  style={{margin: "0 auto"}} size={130} color="#00bc8c" loading={true} />;
 
     return (
-      <div className="random-planet jumbotron rounded">
-        {loader === true? load : null}
+        <div className={"random-planet jumbotron rounded"}>
+        <div style={{margin: "0 auto"}} className={loader === false? "loader-no": null}>
+          {loader === true? load : null}
+        </div>
+      <div   className={  loader === true?  "hidden" : "random-planet jumbotron rounded"} >
         <img className="planet-image"
+             alt={this.props.key}
+
              src={`https://starwars-visualguide.com/assets/img/planets/5.jpg`} />
-        <div>
+        <div className={  loader === true?  "hidden" : null}>
           <h4>Planet Name</h4>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">
@@ -58,7 +64,7 @@ this.updatePlanet()
           </ul>
         </div>
       </div>
-
+        </div>
     );
   }
 }
