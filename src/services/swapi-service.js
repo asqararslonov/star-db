@@ -3,9 +3,14 @@ export default class SwapiService {
 	_apiBase = 'https://swapi.dev/api/';
 
 	async _getResource(url) {
-		const res = await fetch(`${this._apiBase}${url}`);
-		if (!res.ok) throw new Error(`ERROR KELDIIII: ${res.status}`);
-		return await res.json();
+		try {
+			const res = await fetch(`${this._apiBase}${url}`);
+			// if (!res.ok) throw new Error(`ERROR KELDIIII: ${res.status}`);
+			return await res.json();
+		}
+		catch(e) {
+			console.log(`ERROR: ${e}`)
+		}
 	};
 
 	// TO GET PEOPLE
