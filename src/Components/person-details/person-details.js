@@ -1,33 +1,48 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import Spinner from '../Spinner/Spinner';
 
 import './person-details.css';
 
 export default class PersonDetails extends Component {
 
-    render() {
-        return (
-            <div className="person-details card">
-                <img className="person-image"
-                     src="https://starwars-visualguide.com/assets/img/characters/3.jpg"/>
+  render() {
+      const {person, loading} = this.props;
 
-                <div className="card-body">
-                    <h4>R2-D2</h4>
-                    <ul className="list-group list-group-flush">
-                        <li className="list-group-item">
-                            <span className="term">Gender</span>
-                            <span>male</span>
-                        </li>
-                        <li className="list-group-item">
-                            <span className="term">Birth Year</span>
-                            <span>43</span>
-                        </li>
-                        <li className="list-group-item">
-                            <span className="term">Eye Color</span>
-                            <span>red</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        )
-    }
+      if(!person){
+
+        
+        return <span className='d-flex justify-content-center align-items-center h-100'>Select a person from a list</span>
+      }
+   
+const text = <> 
+  <img className="person-image" 
+  src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`} 
+  alt=''/>
+
+<div className="card-body">
+<h4>{person.name} </h4>
+<ul className="list-group list-group-flush">
+  <li className="list-group-item">
+    <span className="term">Gender</span>
+    <span>{person.gender} </span>
+  </li>
+  <li className="list-group-item">
+    <span className="term">Birth Year</span>
+    <span>{person.birth_year} </span>
+  </li>
+  <li className="list-group-item">
+    <span className="term">Eye Color</span>
+    <span>{person.eye_color} </span>
+  </li>
+</ul>
+</div></>
+    return (
+      
+      <div className="person-details card">
+{loading ? 
+        <Spinner isLoading={true} align='center'/>
+: text}
+      </div>
+    )
+  }
 }

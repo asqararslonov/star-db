@@ -21,33 +21,38 @@ export default class RandomPlanet extends Component {
 		};
 
 	componentDidMount() {
-		this.updatePlanet().catch(() => this.onError());
+		this.updatePlanet()
 
 		// this.interval = setInterval( () => {
-		// 	this.updatePlanet().catch(() => this.onError());
-		// }, 2500 );
+		// 	this.updatePlanet();
+		// }, 5000 );
 	}
 
 	componentWillUnmount() {
 		clearInterval( this.interval )
 	}
+	
 
 	onError = () => this.setState({error: true, loader: false});
 
 	updatePlanet = async () => {
-		console.log( 'ishladi' );
-		this.setState({ loader: true });
+		try {
+			this.setState({ loader: true });
 
-		const response = await new SwapiService().getPlanet(this.state.planetId);
+			const response = await new SwapiService().getPlanet(this.state.planetId);
 
-		this.setState({
-			planetId: generateRandomId(3, 8),
-			name: response.name,
-			population: response.population,
-			rotationPeriod: response.rotation_period,
-			diameter: response.diameter,
-			loader: false
-		});
+			this.setState({
+				planetId: generateRandomId(3, 8),
+				name: response.name,
+				population: response.population,
+				rotationPeriod: response.rotation_period,
+				diameter: response.diameter,
+				loader: false
+			});
+		}catch(e){
+			this.onError()
+			}
+	
 	};
 
 	RenderPlanet = () => {

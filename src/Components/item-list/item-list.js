@@ -1,50 +1,58 @@
-import React, { Component } from 'react';
-import './item-list.css';
+import React, { Component } from "react";
+import SwapiService from "../../services/swapi-service";
 import Spinner from "../Spinner/Spinner";
 
+import "./item-list.css";
+
 export default class ItemList extends Component {
-state = {
+
+  state = {
     peopleList: null,
     loader: true
-};
-getPeopleList = async () => {
-    try {
-       const response = await new SwapiService().getAllPeople();
-       this.setState({peopleList: response.results, loader: false})
-    }
-    catch (e) {
-        console.log(e)
-    }
-}
-componentDidMount () {
-        this.getPeopleList()
-}
-RenderPeople = ({peopleList}) => {
-    return  peopleList.map(item => (
-        <div>
-            <li
-                onClick={() => {
+  };
 
-                }}
-                className="list-group-item"
-                key={item.id}>
-                {item.name}
-            </li>
-        </div>
-    )
-    )
+  componentDidMount(){
+    this.getPeopleList()
+  }
 
-}
-render() {
+  getPeopleList = async() => {
+    try{
+      const response =await new SwapiService().getAllPeople();
+      this.setState({ peopleList: response.results, loader: false });
+    }catch(e){
+      console.log(e);
+    }
+  }
+
+  RenderPeople = ({peopleList}) => {
+   return peopleList.map( item => (
+        <li 
+          className='list-group-item' 
+          key={item.name}
+          onClick={() => this.props.onPersonSelected(item.url)}
+        >
+          {item.name}
+        </li>
+
+   ))
+    
+  };
+
+  render() {
         const {
-            state:{peopleList, loader},
-            RenderPeople,
+          state: {peopleList, loader}, 
+          RenderPeople,
         } = this;
+
+
+
     return (
       <ul className="item-list list-group">
-          <Spinner isLoading={loader} align={"center"} />
-          {peopleList ? <RenderPeople peopleList={peopleList}/>: null}
+        <Spinner isLoading={loader} align='center'/>
+          {peopleList ? <RenderPeople peopleList={peopleList}/> : null}
       </ul>
     );
+
+
   }
 }
