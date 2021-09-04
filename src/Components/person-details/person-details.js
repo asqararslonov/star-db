@@ -1,47 +1,75 @@
 import React, { Component } from 'react';
-import Spinner from '../Spinner/Spinner';
+
+import ErrorButton from '../error-button/error-button';
+import SwapiService from '../../services/swapi-service';
 
 import './person-details.css';
 
 export default class PersonDetails extends Component {
 
+  swapiService = new SwapiService();
+
+  state = {
+    person: null
+  };
+
+  componentDidMount() {
+    this.updatePerson();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.personId !== prevProps.personId) {
+      this.updatePerson();
+    }
+  }
+
+  updatePerson() {
+    const { personId } = this.props;
+    if (!personId) {
+      return;
+    }
+
+    this.swapiService
+      .getPerson(personId)
+      .then((person) => {
+        this.setState({ person });
+      });
+  }
+
   render() {
-      const {person, loading} = this.props;
 
-      if(!person){
+    const { person } = this.state;
+    if (!person) {
+      return <span>Select a person from a list</span>;
+    }
 
-        
-        return <span className='d-flex justify-content-center align-items-center h-100'>Select a person from a list</span>
-      }
-   
-const text = <> 
-  <img className="person-image" 
-  src={`https://starwars-visualguide.com/assets/img/characters/${person.id}.jpg`} 
-  alt=''/>
+    const { id, name, gender,
+              birthYear, eyeColor } = person;
 
-<div className="card-body">
-<h4>{person.name} </h4>
-<ul className="list-group list-group-flush">
-  <li className="list-group-item">
-    <span className="term">Gender</span>
-    <span>{person.gender} </span>
-  </li>
-  <li className="list-group-item">
-    <span className="term">Birth Year</span>
-    <span>{person.birth_year} </span>
-  </li>
-  <li className="list-group-item">
-    <span className="term">Eye Color</span>
-    <span>{person.eye_color} </span>
-  </li>
-</ul>
-</div></>
     return (
-      
       <div className="person-details card">
-{loading ? 
-        <Spinner isLoading={true} align='center'/>
-: text}
+        <img className="person-image"
+          src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
+          alt="character"/>
+
+        <div className="card-body">
+          <h4>{name}</h4>
+          <ul className="list-group list-group-flush">
+            <li className="list-group-item">
+              <span className="term">Gender</span>
+              <span>{gender}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Birth Year</span>
+              <span>{birthYear}</span>
+            </li>
+            <li className="list-group-item">
+              <span className="term">Eye Color</span>
+              <span>{eyeColor}</span>
+            </li>
+          </ul>
+          <ErrorButton />
+        </div>
       </div>
     )
   }
