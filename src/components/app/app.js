@@ -41,7 +41,7 @@ export default class App extends Component {
                   exact
                   path="/"
                   render={() => (
-                    <h1 className="text-center my-5">Wecome To StarDB</h1>
+                    <h1 className="text-center my-5">Welcome To StarDB</h1>
                   )}
                 />
                 <Route path="/people/:id?" component={PeoplePage} />
